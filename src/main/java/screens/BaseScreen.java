@@ -2,6 +2,8 @@ package screens;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -29,6 +31,15 @@ public class BaseScreen {
             return false;
         }
 
+    }
+    public void clickWait(WebElement element, int time){
+        try {
+            new WebDriverWait(driver, time)
+                    .until(ExpectedConditions.elementToBeClickable(element)).click();
+        }catch (TimeoutException e){
+            System.out.println("create exception");
+            e.printStackTrace();
+        }
     }
 
 }
